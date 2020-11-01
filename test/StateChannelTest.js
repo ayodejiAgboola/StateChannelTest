@@ -44,10 +44,10 @@ contract('Token', (accounts)=> {
         const tokenInstance = await Token.deployed();
         let channelId="001";
         status = await acceptCreateBlockchainChannel(channelId, accounts[1],tokenInstance);
-        const channel = await tokenInstance.getChannel.call(web3.utils.asciiToHex(channelId));
+        const channelMembers = await tokenInstance.getChannel.call(web3.utils.asciiToHex(channelId));
         console.log(channelStore[channelId]);
-        assert.equal(channel['0'], accounts[0], "Channel should be created on chain");
-        assert.equal(channel['1'], accounts[1], "Channel should be created on chain");
+        assert.equal(channelMembers['0'], accounts[0], "Channel should be created on chain");
+        assert.equal(channelMembers['1'], accounts[1], "Channel should be created on chain");
         assert.equal(channelStore[channelId].status, "Active", "Channel should be active");
     });
 
